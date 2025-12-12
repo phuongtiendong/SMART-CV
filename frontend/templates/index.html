@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart CV - CV Analysis & Ranking</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Smart CV</h1>
+            <p class="subtitle">CV Analysis & Ranking System</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="jobs">Job Management</button>
+            <button class="tab-button" data-tab="upload">Upload CV</button>
+            <button class="tab-button" data-tab="ranking">Ranking</button>
+        </nav>
+
+        <!-- Jobs Tab -->
+        <div id="jobs-tab" class="tab-content active">
+            <div class="section">
+                <h2>Job Positions</h2>
+                <button class="btn btn-primary" id="create-job-btn">Create New Job</button>
+                <div id="jobs-list" class="jobs-list"></div>
+            </div>
+        </div>
+
+        <!-- Upload CV Tab -->
+        <div id="upload-tab" class="tab-content">
+            <div class="section">
+                <h2>Upload CV for Analysis</h2>
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label for="job-select">Select Job Position:</label>
+                        <select id="job-select" name="job_id" required>
+                            <option value="">-- Select a job --</option>
+                        </select>
+                        <span class="error-message" id="job-select-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-file">CV File (PDF):</label>
+                        <input type="file" id="cv-file" name="file" accept=".pdf" required>
+                        <span class="error-message" id="cv-file-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="upload-btn">
+                        <span class="btn-text">Analyze CV</span>
+                        <span class="spinner" id="upload-spinner" style="display: none;"></span>
+                    </button>
+                </form>
+                <div id="upload-result" class="result-container"></div>
+            </div>
+        </div>
+
+        <!-- Ranking Tab -->
+        <div id="ranking-tab" class="tab-content">
+            <div class="section">
+                <h2>Candidate Ranking</h2>
+                <div class="form-group">
+                    <label for="ranking-job-select">Filter by Job:</label>
+                    <select id="ranking-job-select" name="job_id">
+                        <option value="">All Jobs</option>
+                    </select>
+                </div>
+                <div id="ranking-table-container"></div>
+            </div>
+        </div>
+
+        <!-- Job Modal -->
+        <div id="job-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Create New Job</h2>
+                <form id="job-form">
+                    <input type="hidden" id="job-id" name="job_id">
+                    <div class="form-group">
+                        <label for="job-title">Job Title:</label>
+                        <input type="text" id="job-title" name="title" required>
+                        <span class="error-message" id="job-title-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-description">Job Description:</label>
+                        <textarea id="job-description" name="description" rows="10" required></textarea>
+                        <span class="error-message" id="job-description-error"></span>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-job-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="save-job-btn">
+                            <span class="btn-text">Save</span>
+                            <span class="spinner" id="job-spinner" style="display: none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="message-container" class="message-container"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
